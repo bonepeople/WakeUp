@@ -3,6 +3,7 @@ package com.bonepeople.wakeup.ui;
 import com.bonepeople.wakeup.R;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,50 +20,68 @@ public class Fragment_home_body extends Fragment
 		View _view = inflater.inflate(R.layout.fragment_home_body, container, false);
 
 		ListView _listview = (ListView) _view.findViewById(R.id.listview_fragment_home_body);
-		MyAdapter _listadapter = new MyAdapter();
+		MyAdapter _listadapter = new MyAdapter(getActivity());
 		_listview.setAdapter(_listadapter);
 
 		return _view;
 	}
 
-	private class MyAdapter extends BaseAdapter
+	private static class MyAdapter extends BaseAdapter
 	{
+		private static LayoutInflater _inflater;
+
+		public MyAdapter(Context _context)
+		{
+			_inflater = LayoutInflater.from(_context);
+		}
+
+		private static class ViewHolder
+		{
+			public TextView _text_name;
+			public TextView _text_comment;
+		}
 
 		@Override
 		public int getCount()
 		{
-			// TODO Auto-generated method stub
 			return 20;
 		}
 
 		@Override
 		public Object getItem(int position)
 		{
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
 		public long getItemId(int position)
 		{
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent)
 		{
-			// TODO Auto-generated method stub
-			View _view = View.inflate(getActivity().getApplicationContext(), R.layout.item_computer, null);
-			TextView _text_name = (TextView) _view.findViewById(R.id.textview_item_computer_name);
-			TextView _text_comment = (TextView) _view.findViewById(R.id.textview_item_computer_comment);
+			View _view = convertView;
+			ViewHolder _holder;
 
-			_text_name.setText("123");
-			_text_comment.setText("99999999999999999999999");
+			if (convertView == null)
+			{
+				_view = _inflater.inflate(R.layout.item_computer, null);
+				_holder = new ViewHolder();
+				_holder._text_name = (TextView) _view.findViewById(R.id.textview_item_computer_name);
+				_holder._text_comment = (TextView) _view.findViewById(R.id.textview_item_computer_comment);
+				_view.setTag(_holder);
+			}
+			else
+			{
+				_holder = (ViewHolder) _view.getTag();
+			}
+
+			_holder._text_name.setText("123");
+			_holder._text_comment.setText("99999999999999999999999");
 
 			return _view;
 		}
-
 	}
-
 }
