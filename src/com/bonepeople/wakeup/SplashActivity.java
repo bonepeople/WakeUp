@@ -54,7 +54,7 @@ public class SplashActivity extends Activity
 
 	private void load_HomeActivity()
 	{
-		Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
 		SplashActivity.this.finish();
 	}
