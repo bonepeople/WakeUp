@@ -1,6 +1,10 @@
 package com.bonepeople.wakeup.ui;
 
+import java.util.ArrayList;
+
 import com.bonepeople.wakeup.R;
+import com.bonepeople.wakeup.model.Computer;
+import com.bonepeople.wakeup.utils.DataUtils;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -29,10 +33,13 @@ public class Fragment_home_body extends Fragment
 	private static class MyAdapter extends BaseAdapter
 	{
 		private static LayoutInflater _inflater;
+		private ArrayList<Computer> data;
 
 		public MyAdapter(Context _context)
 		{
 			_inflater = LayoutInflater.from(_context);
+			data = DataUtils.get_computers(_context);
+
 		}
 
 		private static class ViewHolder
@@ -44,13 +51,13 @@ public class Fragment_home_body extends Fragment
 		@Override
 		public int getCount()
 		{
-			return 20;
+			return data.size();
 		}
 
 		@Override
-		public Object getItem(int position)
+		public Computer getItem(int position)
 		{
-			return null;
+			return data.get(position);
 		}
 
 		@Override
@@ -78,8 +85,9 @@ public class Fragment_home_body extends Fragment
 				_holder = (ViewHolder) _view.getTag();
 			}
 
-			_holder._text_name.setText("123");
-			_holder._text_comment.setText("99999999999999999999999");
+			Computer _temp_computer = getItem(position);
+			_holder._text_name.setText(_temp_computer.get_name());
+			_holder._text_comment.setText(_temp_computer.get_comment());
 
 			return _view;
 		}
