@@ -12,4 +12,6 @@
         android:layout_marginLeft="10dp"
         android:text="远程开机助手" />
 
+    
+   	
 </RelativeLayout>
