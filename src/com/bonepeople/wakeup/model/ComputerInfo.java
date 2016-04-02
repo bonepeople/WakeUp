@@ -9,6 +9,14 @@ public class ComputerInfo
 	private String _mac;
 	private String _ip;
 
+	public ComputerInfo(String _name, String _comment, String _mac, String _ip)
+	{
+		this._name = _name;
+		this._comment = _comment;
+		this._mac = _mac;
+		this._ip = _ip;
+	}
+
 	public String get_name()
 	{
 		return _name;
@@ -58,5 +66,5 @@ public class ComputerInfo
 		_values.put("ip", String.valueOf(this._ip));
 		return _values;
 	}
-	
+
 }

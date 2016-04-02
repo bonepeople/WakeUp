@@ -1,10 +1,11 @@
 package com.bonepeople.wakeup.ui;
 
+import com.bonepeople.wakeup.AddActivity;
 import com.bonepeople.wakeup.R;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,7 +30,6 @@ public class Fragment_home_title extends Fragment
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
-		Log.i("sql", "menu create");
 		inflater.inflate(R.menu.menu_home, menu);
 	}
 
@@ -40,6 +40,8 @@ public class Fragment_home_title extends Fragment
 		{
 		case R.id.menu_home_add:
 			Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(getActivity(), AddActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.menu_home_import:
 			Toast.makeText(getActivity(), "import", Toast.LENGTH_SHORT).show();

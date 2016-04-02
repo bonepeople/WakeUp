@@ -12,7 +12,23 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DataUtils
 {
-	public static void Save_ComputerInfo(Context _context, ComputerInfo _info)
+	public static boolean has_computer_name(Context _context, String _name)
+	{
+		DatabaseOpenHelper _openhelper = new DatabaseOpenHelper(_context);
+		SQLiteDatabase _db = _openhelper.getReadableDatabase();
+		Cursor _temp_cursor = _db.query("computers", new String[] { "name" }, "name=?", new String[] { _name }, null, null, "id");
+		if (_temp_cursor.moveToNext())
+		{
+			_temp_cursor.close();
+			_db.close();
+			return true;
+		}
+		_temp_cursor.close();
+		_db.close();
+		return false;
+	}
+
+	public static void save_computerinfo(Context _context, ComputerInfo _info)
 	{
 
 		DatabaseOpenHelper _openhelper = new DatabaseOpenHelper(_context);
@@ -29,7 +45,7 @@ public class DataUtils
 		DatabaseOpenHelper _openhelper = new DatabaseOpenHelper(_context);
 		SQLiteDatabase _db = _openhelper.getReadableDatabase();
 		Cursor _temp_cursor = _db.query("computers", new String[] { "name", "comment" }, null, null, null, null, "id");
-		if (_temp_cursor.moveToNext())
+		while (_temp_cursor.moveToNext())
 		{
 			Computer _temp_computer = new Computer();
 			_temp_computer.set_name(_temp_cursor.getString(0));

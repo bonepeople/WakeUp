@@ -18,30 +18,45 @@ import android.widget.TextView;
 
 public class Fragment_home_body extends Fragment
 {
+	private ListView _listview;
+	private MyAdapter _listadapter;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View _view = inflater.inflate(R.layout.fragment_home_body, container, false);
 
-		ListView _listview = (ListView) _view.findViewById(R.id.listview_fragment_home_body);
-		MyAdapter _listadapter = new MyAdapter(getActivity());
+		_listview = (ListView) _view.findViewById(R.id.listview_fragment_home_body);
+		_listadapter = new MyAdapter(getActivity());
 		_listview.setAdapter(_listadapter);
-
 		return _view;
+	}
+
+	@Override
+	public void onResume()
+	{
+		_listadapter.refresh_data();
+		_listadapter.notifyDataSetChanged();
+		// TODO Auto-generated method stub
+		super.onResume();
 	}
 
 	private static class MyAdapter extends BaseAdapter
 	{
-		private static LayoutInflater _inflater;
-		private ArrayList<Computer> data;
+		private Context _context;
+		private LayoutInflater _inflater;
+		private ArrayList<Computer> _data;
 
 		public MyAdapter(Context _context)
 		{
+			this._context = _context;
 			_inflater = LayoutInflater.from(_context);
-			data = DataUtils.get_computers(_context);
-
 		}
 
+		public void refresh_data()
+		{
+			_data = DataUtils.get_computers(_context);
+		}
 		private static class ViewHolder
 		{
 			public TextView _text_name;
@@ -51,13 +66,13 @@ public class Fragment_home_body extends Fragment
 		@Override
 		public int getCount()
 		{
-			return data.size();
+			return _data.size();
 		}
 
 		@Override
 		public Computer getItem(int position)
 		{
-			return data.get(position);
+			return _data.get(position);
 		}
 
 		@Override

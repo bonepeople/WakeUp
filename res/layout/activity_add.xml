@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textview_add_note_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\n名称： (名称不能重复)" />
+
+    <EditText
+        android:id="@+id/edittext_add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textview_add_note_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\n备注：" />
+
+    <EditText
+        android:id="@+id/edittext_add_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:maxLength="50"
+        android:maxLines="5" />
+
+    <TextView
+        android:id="@+id/textview_add_note_mac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\nMAC地址：" />
+
+    <EditText
+        android:id="@+id/edittext_add_mac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"
+        android:hint="例：AA-BB-CC-11-22-33"
+        android:inputType="textVisiblePassword"
+        android:maxLength="17"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/textview_add_note_ip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="\nIP地址：(针对此计算机的广播地址)" />
+
+    <EditText
+        android:id="@+id/edittext_add_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789."
+        android:hint="例：192.168.1.255"
+        android:inputType="number"
+        android:maxLength="15" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/button_add_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定" />
+
+        <Button
+            android:id="@+id/button_add_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消" />
+    </LinearLayout>
+
+</LinearLayout>

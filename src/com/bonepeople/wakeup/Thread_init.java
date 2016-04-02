@@ -27,7 +27,8 @@ public class Thread_init extends Thread
 		{
 			try
 			{
-				Thread.sleep(2000 - dtime);
+//				Thread.sleep(2000 - dtime);
+				Thread.sleep(200 - dtime);
 			}
 			catch (InterruptedException e)
 			{
