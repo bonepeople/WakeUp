@@ -51,12 +51,14 @@ public class Fragment_home_body extends Fragment
 		{
 			this._context = _context;
 			_inflater = LayoutInflater.from(_context);
+			_data = new ArrayList<Computer>();
 		}
 
 		public void refresh_data()
 		{
 			_data = DataUtils.get_computers(_context);
 		}
+
 		private static class ViewHolder
 		{
 			public TextView _text_name;
@@ -66,6 +68,8 @@ public class Fragment_home_body extends Fragment
 		@Override
 		public int getCount()
 		{
+			if (_data.size() == 0)
+				_data.add(new Computer());
 			return _data.size();
 		}
 

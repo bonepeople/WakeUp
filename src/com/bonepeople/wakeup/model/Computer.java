@@ -2,8 +2,8 @@ package com.bonepeople.wakeup.model;
 
 public class Computer
 {
-	private String _name;
-	private String _comment;
+	private String _name = "空空如也";
+	private String _comment = "通过右上角的菜单添加电脑吧";
 
 	public String get_name()
 	{
