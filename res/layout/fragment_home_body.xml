@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textview_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#80000000"
+        android:text="目前还没有任何电脑，快去添加吧..." />
 
     <ListView
         android:id="@+id/listview_fragment_home_body"
@@ -10,4 +17,56 @@
         android:layout_height="match_parent" >
     </ListView>
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relativelayout_menu_pop_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" >
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/frame"
+            android:columnCount="2" >
+
+            <com.bonepeople.wakeup.ui.TextImageButton
+                android:id="@+id/button_menu_pop_wake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_wake"
+                android:text="开机"
+                android:textColor="#FFFFFF" >
+            </com.bonepeople.wakeup.ui.TextImageButton>
+
+            <com.bonepeople.wakeup.ui.TextImageButton
+                android:id="@+id/button_menu_pop_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_detail"
+                android:text="详细"
+                android:textColor="#FFFFFF" >
+            </com.bonepeople.wakeup.ui.TextImageButton>
+
+            <com.bonepeople.wakeup.ui.TextImageButton
+                android:id="@+id/button_menu_pop_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_update"
+                android:text="修改"
+                android:textColor="#FFFFFF" >
+            </com.bonepeople.wakeup.ui.TextImageButton>
+
+            <com.bonepeople.wakeup.ui.TextImageButton
+                android:id="@+id/button_menu_pop_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/button_delete"
+                android:text="删除"
+                android:textColor="#FFFFFF" >
+            </com.bonepeople.wakeup.ui.TextImageButton>
+        </GridLayout>
+    </RelativeLayout>
+
+</FrameLayout>

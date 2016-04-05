@@ -1,35 +1,148 @@
 package com.bonepeople.wakeup.ui;
 
-import java.util.ArrayList;
-
 import com.bonepeople.wakeup.R;
-import com.bonepeople.wakeup.model.Computer;
-import com.bonepeople.wakeup.utils.DataUtils;
+import com.bonepeople.wakeup.model.ListAdapter_computers;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Fragment_home_body extends Fragment
 {
 	private ListView _listview;
-	private MyAdapter _listadapter;
+	private ListAdapter_computers _listadapter;
+	private TextView _textview_empty;
+	private RelativeLayout _relativelayout_menu_pop_root;
+	private TextImageButton _button_menu_pop_wake;
+	private TextImageButton _button_menu_pop_detail;
+	private TextImageButton _button_menu_pop_update;
+	private TextImageButton _button_menu_pop_delete;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View _view = inflater.inflate(R.layout.fragment_home_body, container, false);
 
+		_relativelayout_menu_pop_root = (RelativeLayout) _view.findViewById(R.id.relativelayout_menu_pop_root);
+		_button_menu_pop_wake = (TextImageButton) _view.findViewById(R.id.button_menu_pop_wake);
+		_button_menu_pop_detail = (TextImageButton) _view.findViewById(R.id.button_menu_pop_detail);
+		_button_menu_pop_update = (TextImageButton) _view.findViewById(R.id.button_menu_pop_update);
+		_button_menu_pop_delete = (TextImageButton) _view.findViewById(R.id.button_menu_pop_delete);
 		_listview = (ListView) _view.findViewById(R.id.listview_fragment_home_body);
-		_listadapter = new MyAdapter(getActivity());
+		_textview_empty = (TextView) _view.findViewById(R.id.textview_empty);
+
+		_listadapter = new ListAdapter_computers(getActivity());
 		_listview.setAdapter(_listadapter);
+		_listview.setEmptyView(_textview_empty);
+		_listview.setOnItemClickListener(new OnItemClickListener()
+		{
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				System.out.println(position);
+				TextView _temp_text = (TextView) view.findViewById(R.id.textview_item_computer_name);
+				System.out.println(_temp_text.getText());
+
+				menu_show();
+			}
+
+		});
+
+		_relativelayout_menu_pop_root.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				System.out.println("grid have been clicked");
+				menu_hide();
+			}
+		});
+
+		_button_menu_pop_wake.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				Toast.makeText(getActivity(), "wake", Toast.LENGTH_SHORT).show();
+				System.out.println(v.getParent().getClass().toString());
+				menu_hide();
+			}
+		});
+		_button_menu_pop_detail.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				Toast.makeText(getActivity(), "detail", Toast.LENGTH_SHORT).show();
+				menu_hide();
+			}
+		});
+
+		_button_menu_pop_update.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				Toast.makeText(getActivity(), "update", Toast.LENGTH_SHORT).show();
+				menu_hide();
+			}
+		});
+		_button_menu_pop_delete.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v)
+			{
+				Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
+				menu_hide();
+			}
+		});
+
 		return _view;
+	}
+
+	private void menu_show()
+	{
+		AnimationSet _animationset = new AnimationSet(true);
+		AlphaAnimation _alpha = new AlphaAnimation(0, 1);
+		_alpha.setDuration(200);
+		ScaleAnimation _scale = new ScaleAnimation(0.9f, 1f, 0.9f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		_scale.setDuration(200);
+		_animationset.addAnimation(_alpha);
+		_animationset.addAnimation(_scale);
+		_relativelayout_menu_pop_root.setVisibility(RelativeLayout.VISIBLE);
+		_relativelayout_menu_pop_root.startAnimation(_animationset);
+	}
+
+	private void menu_hide()
+	{
+		AnimationSet _animationset = new AnimationSet(true);
+		AlphaAnimation _alpha = new AlphaAnimation(1, 0);
+		_alpha.setDuration(200);
+		ScaleAnimation _scale = new ScaleAnimation(1f, 0.9f, 1f, 0.9f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		_scale.setDuration(200);
+		_animationset.addAnimation(_alpha);
+		_animationset.addAnimation(_scale);
+		_relativelayout_menu_pop_root.setVisibility(RelativeLayout.INVISIBLE);
+		_relativelayout_menu_pop_root.startAnimation(_animationset);
 	}
 
 	@Override
@@ -37,78 +150,16 @@ public class Fragment_home_body extends Fragment
 	{
 		_listadapter.refresh_data();
 		_listadapter.notifyDataSetChanged();
-		// TODO Auto-generated method stub
+
 		super.onResume();
 	}
 
-	private static class MyAdapter extends BaseAdapter
+	@Override
+	public void onPause()
 	{
-		private Context _context;
-		private LayoutInflater _inflater;
-		private ArrayList<Computer> _data;
-
-		public MyAdapter(Context _context)
-		{
-			this._context = _context;
-			_inflater = LayoutInflater.from(_context);
-			_data = new ArrayList<Computer>();
-		}
-
-		public void refresh_data()
-		{
-			_data = DataUtils.get_computers(_context);
-		}
-
-		private static class ViewHolder
-		{
-			public TextView _text_name;
-			public TextView _text_comment;
-		}
-
-		@Override
-		public int getCount()
-		{
-			if (_data.size() == 0)
-				_data.add(new Computer());
-			return _data.size();
-		}
-
-		@Override
-		public Computer getItem(int position)
-		{
-			return _data.get(position);
-		}
-
-		@Override
-		public long getItemId(int position)
-		{
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent)
-		{
-			View _view = convertView;
-			ViewHolder _holder;
-
-			if (convertView == null)
-			{
-				_view = _inflater.inflate(R.layout.item_computer, null);
-				_holder = new ViewHolder();
-				_holder._text_name = (TextView) _view.findViewById(R.id.textview_item_computer_name);
-				_holder._text_comment = (TextView) _view.findViewById(R.id.textview_item_computer_comment);
-				_view.setTag(_holder);
-			}
-			else
-			{
-				_holder = (ViewHolder) _view.getTag();
-			}
-
-			Computer _temp_computer = getItem(position);
-			_holder._text_name.setText(_temp_computer.get_name());
-			_holder._text_comment.setText(_temp_computer.get_comment());
-
-			return _view;
-		}
+		if (_relativelayout_menu_pop_root.getVisibility() == RelativeLayout.VISIBLE)
+			menu_hide();
+		super.onPause();
 	}
+
 }

@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="name"
-        android:inputType="text" >
+        android:inputType="text"
+        android:maxLength="20" >
 
         <requestFocus />
     </EditText>
@@ -74,12 +75,14 @@
 
         <Button
             android:id="@+id/button_add_ok"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="确定" />
 
         <Button
             android:id="@+id/button_add_cancel"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消" />
