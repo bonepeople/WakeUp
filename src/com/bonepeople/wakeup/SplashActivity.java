@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 public class SplashActivity extends Activity
 {
-	public static final int INIT_PASS = 1;
+	public static final int INIT_FAILED = 0;
+	public static final int INIT_SUCCESSFUL = 1;
 	public static final int INIT_UPDATE = 2;
 
 	private TextView textView_splash_version;
@@ -25,13 +26,18 @@ public class SplashActivity extends Activity
 		{
 			switch (msg.what)
 			{
-			case INIT_PASS:
+			case INIT_FAILED:
+				Toast.makeText(getApplicationContext(), "程序加载失败，请重新安装", Toast.LENGTH_SHORT).show();
+				textView_splash_version.setText("程序加载失败，请重新安装");
+				break;
+			case INIT_SUCCESSFUL:
+				load_HomeActivity();
 				break;
 			case INIT_UPDATE:
 				Toast.makeText(getApplicationContext(), "版本过时，需要更新。", Toast.LENGTH_SHORT).show();
+				load_HomeActivity();
 			}
 			Toast.makeText(getApplicationContext(), "后台用时：" + String.valueOf(msg.arg1), Toast.LENGTH_SHORT).show();
-			load_HomeActivity();
 		};
 	};
 
@@ -47,7 +53,7 @@ public class SplashActivity extends Activity
 		aa.setDuration(2000);
 		relativeLayout_splash_root.startAnimation(aa);
 
-		Thread_init thread_init = new Thread_init(handler);
+		Thread_init thread_init = new Thread_init(getApplicationContext(), handler);
 		thread_init.start();
 
 	}
@@ -56,6 +62,6 @@ public class SplashActivity extends Activity
 	{
 		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
-		SplashActivity.this.finish();
+		finish();
 	}
 }

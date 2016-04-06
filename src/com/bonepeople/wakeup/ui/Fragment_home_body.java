@@ -22,9 +22,11 @@ import android.widget.Toast;
 
 public class Fragment_home_body extends Fragment
 {
+	private Fragment_home_comment _fragment_home_comment;
 	private ListView _listview;
 	private ListAdapter_computers _listadapter;
 	private TextView _textview_empty;
+	private String _selected = "";
 	private RelativeLayout _relativelayout_menu_pop_root;
 	private TextImageButton _button_menu_pop_wake;
 	private TextImageButton _button_menu_pop_detail;
@@ -36,6 +38,7 @@ public class Fragment_home_body extends Fragment
 	{
 		View _view = inflater.inflate(R.layout.fragment_home_body, container, false);
 
+		_fragment_home_comment = (Fragment_home_comment) getFragmentManager().findFragmentById(R.id.fragment_home_comment);
 		_relativelayout_menu_pop_root = (RelativeLayout) _view.findViewById(R.id.relativelayout_menu_pop_root);
 		_button_menu_pop_wake = (TextImageButton) _view.findViewById(R.id.button_menu_pop_wake);
 		_button_menu_pop_detail = (TextImageButton) _view.findViewById(R.id.button_menu_pop_detail);
@@ -53,9 +56,8 @@ public class Fragment_home_body extends Fragment
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				System.out.println(position);
 				TextView _temp_text = (TextView) view.findViewById(R.id.textview_item_computer_name);
-				System.out.println(_temp_text.getText());
+				_selected = _temp_text.getText().toString();
 
 				menu_show();
 			}
@@ -68,7 +70,6 @@ public class Fragment_home_body extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				System.out.println("grid have been clicked");
 				menu_hide();
 			}
 		});
@@ -91,6 +92,7 @@ public class Fragment_home_body extends Fragment
 			public void onClick(View v)
 			{
 				Toast.makeText(getActivity(), "detail", Toast.LENGTH_SHORT).show();
+				_fragment_home_comment.show(_selected);
 				menu_hide();
 			}
 		});
@@ -136,9 +138,9 @@ public class Fragment_home_body extends Fragment
 	{
 		AnimationSet _animationset = new AnimationSet(true);
 		AlphaAnimation _alpha = new AlphaAnimation(1, 0);
-		_alpha.setDuration(200);
+		_alpha.setDuration(100);
 		ScaleAnimation _scale = new ScaleAnimation(1f, 0.9f, 1f, 0.9f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-		_scale.setDuration(200);
+		_scale.setDuration(100);
 		_animationset.addAnimation(_alpha);
 		_animationset.addAnimation(_scale);
 		_relativelayout_menu_pop_root.setVisibility(RelativeLayout.INVISIBLE);
@@ -162,4 +164,13 @@ public class Fragment_home_body extends Fragment
 		super.onPause();
 	}
 
+	public boolean onBackPressed()
+	{
+		if (_relativelayout_menu_pop_root.getVisibility() == RelativeLayout.VISIBLE)
+			menu_hide();
+		else
+			return _fragment_home_comment.onBackPressed();
+
+		return true;
+	}
 }

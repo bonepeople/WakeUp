@@ -5,17 +5,20 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textview_add_note_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\n名称： (名称不能重复)" />
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:text="@string/textview_note_name"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edittext_add_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="name"
+        android:hint="(名称不能重复)"
         android:inputType="text"
         android:maxLength="20" >
 
@@ -23,10 +26,13 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textview_add_note_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\n备注：" />
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:text="@string/textview_note_comment"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edittext_add_comment"
@@ -38,10 +44,13 @@
         android:maxLines="5" />
 
     <TextView
-        android:id="@+id/textview_add_note_mac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\nMAC地址：" />
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:text="@string/textview_note_mac"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edittext_add_mac"
@@ -54,10 +63,13 @@
         android:singleLine="true" />
 
     <TextView
-        android:id="@+id/textview_add_note_ip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="\nIP地址：(针对此计算机的广播地址)" />
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:text="@string/textview_note_ip"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edittext_add_ip"

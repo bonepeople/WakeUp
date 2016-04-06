@@ -4,7 +4,6 @@ import com.bonepeople.wakeup.model.ComputerInfo;
 import com.bonepeople.wakeup.utils.DataUtils;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,7 +71,7 @@ public class AddActivity extends Activity
 					return;
 				}
 
-				DataUtils.save_computerinfo(AddActivity.this, new ComputerInfo(_string_name, _string_comment, _string_mac, _string_ip));
+				DataUtils.save_computerinfo(new ComputerInfo(_string_name, _string_comment, _string_mac, _string_ip));
 				Toast.makeText(AddActivity.this, "ok", Toast.LENGTH_SHORT).show();
 				// setResult(1, _intent);
 				finish();
@@ -80,7 +79,7 @@ public class AddActivity extends Activity
 
 			private boolean check_name(String _name)
 			{
-				return !DataUtils.has_computer_name(AddActivity.this, _name);
+				return !DataUtils.has_computer_name(_name);
 			}
 
 			private boolean check_mac(String _mac)

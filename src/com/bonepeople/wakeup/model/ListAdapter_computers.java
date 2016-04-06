@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class ListAdapter_computers extends BaseAdapter
 {
-	private Context _context;
 	private LayoutInflater _inflater;
 	private ArrayList<Computer> _data;
 
@@ -26,14 +25,13 @@ public class ListAdapter_computers extends BaseAdapter
 
 	public ListAdapter_computers(Context _context)
 	{
-		this._context = _context;
 		_inflater = LayoutInflater.from(_context);
 		_data = new ArrayList<Computer>();
 	}
 
 	public void refresh_data()
 	{
-		_data = DataUtils.get_computers(_context);
+		_data = DataUtils.get_computers();
 	}
 
 	@Override

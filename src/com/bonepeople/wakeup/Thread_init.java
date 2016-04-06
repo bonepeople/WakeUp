@@ -1,25 +1,32 @@
 package com.bonepeople.wakeup;
 
+import com.bonepeople.wakeup.utils.DataUtils;
+
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
 public class Thread_init extends Thread
 {
-	private Handler handler;
+	private Handler _handler;
+	private Context _context;
 
-	Thread_init(Handler handler)
+	Thread_init(Context _context, Handler _handler)
 	{
-		this.handler = handler;
+		this._context = _context;
+		this._handler = _handler;
 	}
 
 	public void run()
 	{
 		long startTime = System.currentTimeMillis();
-
 		Message msg = Message.obtain();
 
-		msg.what = SplashActivity.INIT_PASS;
-		
+		if (DataUtils.init(_context))
+			msg.what = SplashActivity.INIT_SUCCESSFUL;
+		else
+			msg.what = SplashActivity.INIT_FAILED;
+
 		long endTime = System.currentTimeMillis();
 		long dtime = endTime - startTime;
 
@@ -27,7 +34,7 @@ public class Thread_init extends Thread
 		{
 			try
 			{
-//				Thread.sleep(2000 - dtime);
+				// Thread.sleep(2000 - dtime);
 				Thread.sleep(200 - dtime);
 			}
 			catch (InterruptedException e)
@@ -37,7 +44,7 @@ public class Thread_init extends Thread
 			}
 		}
 		msg.arg1 = (int) dtime;
-		handler.sendMessage(msg);
+		_handler.sendMessage(msg);
 	}
 
 }
