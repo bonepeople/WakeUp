@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddActivity extends Activity
+public class EditActivity extends Activity
 {
 	// Intent _intent;
 	private Button _button_ok;
@@ -49,30 +49,30 @@ public class AddActivity extends Activity
 
 				if (_string_name.isEmpty() || _string_mac.isEmpty() || _string_ip.isEmpty())
 				{
-					Toast.makeText(AddActivity.this, "请完善以上信息", Toast.LENGTH_SHORT).show();
+					Toast.makeText(EditActivity.this, "请完善以上信息", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				if (!check_name(_string_name))
 				{
-					Toast.makeText(AddActivity.this, "名称重复", Toast.LENGTH_SHORT).show();
+					Toast.makeText(EditActivity.this, "名称重复", Toast.LENGTH_SHORT).show();
 					_edittext_add_name.requestFocus();
 					return;
 				}
 				if (!check_mac(_string_mac))
 				{
-					Toast.makeText(AddActivity.this, "MAC地址错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(EditActivity.this, "MAC地址错误", Toast.LENGTH_SHORT).show();
 					_edittext_add_mac.requestFocus();
 					return;
 				}
 				if (!check_ip(_string_ip))
 				{
-					Toast.makeText(AddActivity.this, "IP地址错误", Toast.LENGTH_SHORT).show();
+					Toast.makeText(EditActivity.this, "IP地址错误", Toast.LENGTH_SHORT).show();
 					_edittext_add_ip.requestFocus();
 					return;
 				}
 
 				DataUtils.add_computerinfo(new ComputerInfo(_string_name, _string_comment, _string_mac, _string_ip));
-				Toast.makeText(AddActivity.this, "ok", Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditActivity.this, "ok", Toast.LENGTH_SHORT).show();
 				// setResult(1, _intent);
 				finish();
 			}

@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme_full" >
         </activity>
         <activity
-            android:name="com.bonepeople.wakeup.AddActivity"
+            android:name="com.bonepeople.wakeup.EditActivity"
             android:theme="@style/AppTheme_full" >
         </activity>
     </application>

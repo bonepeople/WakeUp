@@ -1,6 +1,6 @@
 package com.bonepeople.wakeup.ui;
 
-import com.bonepeople.wakeup.AddActivity;
+import com.bonepeople.wakeup.EditActivity;
 import com.bonepeople.wakeup.R;
 
 import android.app.Fragment;
@@ -40,7 +40,7 @@ public class Fragment_home_title extends Fragment
 		{
 		case R.id.menu_home_add:
 			Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(getActivity(), AddActivity.class);
+			Intent intent = new Intent(getActivity(), EditActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.menu_home_import:
