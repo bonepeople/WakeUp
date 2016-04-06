@@ -37,7 +37,7 @@ public class DataUtils
 		return false;
 	}
 
-	public static void save_computerinfo(ComputerInfo _info)
+	public static void add_computerinfo(ComputerInfo _info)
 	{
 
 		SQLiteDatabase _db = _openhelper.getWritableDatabase();
@@ -45,6 +45,14 @@ public class DataUtils
 		_db.close();
 		// /data/data/com.bonepeople.wakeup/databases
 		// sqlite> insert into computers (id,name,comment,mac,ip) values('1','home','home lan','ad-ac-qf-gu-4r-h9','192.168.1.255');
+	}
+
+	public static int delete_computerinfo(String _name)
+	{
+		int _temp_n;
+		SQLiteDatabase _db = _openhelper.getWritableDatabase();
+		_temp_n = _db.delete("computers", "name=?", new String[] { _name });
+		return _temp_n;
 	}
 
 	public static ArrayList<Computer> get_computers()

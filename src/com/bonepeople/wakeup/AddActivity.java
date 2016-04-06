@@ -71,7 +71,7 @@ public class AddActivity extends Activity
 					return;
 				}
 
-				DataUtils.save_computerinfo(new ComputerInfo(_string_name, _string_comment, _string_mac, _string_ip));
+				DataUtils.add_computerinfo(new ComputerInfo(_string_name, _string_comment, _string_mac, _string_ip));
 				Toast.makeText(AddActivity.this, "ok", Toast.LENGTH_SHORT).show();
 				// setResult(1, _intent);
 				finish();

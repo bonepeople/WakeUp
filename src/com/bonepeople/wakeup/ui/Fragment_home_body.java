@@ -2,6 +2,7 @@ package com.bonepeople.wakeup.ui;
 
 import com.bonepeople.wakeup.R;
 import com.bonepeople.wakeup.model.ListAdapter_computers;
+import com.bonepeople.wakeup.utils.DataUtils;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -81,7 +82,6 @@ public class Fragment_home_body extends Fragment
 			public void onClick(View v)
 			{
 				Toast.makeText(getActivity(), "wake", Toast.LENGTH_SHORT).show();
-				System.out.println(v.getParent().getClass().toString());
 				menu_hide();
 			}
 		});
@@ -91,7 +91,6 @@ public class Fragment_home_body extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				Toast.makeText(getActivity(), "detail", Toast.LENGTH_SHORT).show();
 				_fragment_home_comment.show(_selected);
 				menu_hide();
 			}
@@ -113,7 +112,15 @@ public class Fragment_home_body extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				Toast.makeText(getActivity(), "delete", Toast.LENGTH_SHORT).show();
+				int _temp_n;
+				_temp_n = DataUtils.delete_computerinfo(_selected);
+				if (_temp_n == 0)
+					Toast.makeText(getActivity(), "数据库异常，请重新尝试。", Toast.LENGTH_SHORT).show();
+				else
+					Toast.makeText(getActivity(), "已经删除" + _temp_n + "条记录。", Toast.LENGTH_SHORT).show();
+
+				_listadapter.refresh_data();
+				_listadapter.notifyDataSetChanged();
 				menu_hide();
 			}
 		});
