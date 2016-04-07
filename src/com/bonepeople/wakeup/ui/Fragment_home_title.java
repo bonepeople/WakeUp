@@ -2,6 +2,7 @@ package com.bonepeople.wakeup.ui;
 
 import com.bonepeople.wakeup.EditActivity;
 import com.bonepeople.wakeup.R;
+import com.bonepeople.wakeup.utils.XMLUtils;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -45,7 +46,10 @@ public class Fragment_home_title extends Fragment
 			Toast.makeText(getActivity(), "import", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.menu_home_export:
-			Toast.makeText(getActivity(), "export", Toast.LENGTH_SHORT).show();
+			if (XMLUtils.export_data(getActivity()))
+				Toast.makeText(getActivity(), "信息已成功导出。", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(getActivity(), "信息导出失败。", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.menu_home_help:
 			Toast.makeText(getActivity(), "help", Toast.LENGTH_SHORT).show();
