@@ -1,10 +1,12 @@
 package com.bonepeople.wakeup.ui;
 
+import com.bonepeople.wakeup.EditActivity;
 import com.bonepeople.wakeup.R;
 import com.bonepeople.wakeup.model.ListAdapter_computers;
 import com.bonepeople.wakeup.utils.DataUtils;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,21 +55,17 @@ public class Fragment_home_body extends Fragment
 		_listview.setEmptyView(_textview_empty);
 		_listview.setOnItemClickListener(new OnItemClickListener()
 		{
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				TextView _temp_text = (TextView) view.findViewById(R.id.textview_item_computer_name);
 				_selected = _temp_text.getText().toString();
-
 				menu_show();
 			}
-
 		});
 
 		_relativelayout_menu_pop_root.setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{
@@ -77,7 +75,6 @@ public class Fragment_home_body extends Fragment
 
 		_button_menu_pop_wake.setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{
@@ -87,7 +84,6 @@ public class Fragment_home_body extends Fragment
 		});
 		_button_menu_pop_detail.setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{
@@ -98,17 +94,18 @@ public class Fragment_home_body extends Fragment
 
 		_button_menu_pop_update.setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{
-				Toast.makeText(getActivity(), "update", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getActivity(), EditActivity.class);
+				intent.putExtra("type", "update");
+				intent.putExtra("name", _selected);
+				startActivity(intent);
 				menu_hide();
 			}
 		});
 		_button_menu_pop_delete.setOnClickListener(new OnClickListener()
 		{
-
 			@Override
 			public void onClick(View v)
 			{

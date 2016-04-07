@@ -22,6 +22,23 @@ public class DataUtils
 		return true;
 	}
 
+	public static ArrayList<Computer> get_computers()
+	{
+		ArrayList<Computer> data = new ArrayList<Computer>();
+		SQLiteDatabase _db = _openhelper.getReadableDatabase();
+		Cursor _temp_cursor = _db.query("computers", new String[] { "name", "comment" }, null, null, null, null, "id");
+		while (_temp_cursor.moveToNext())
+		{
+			Computer _temp_computer = new Computer();
+			_temp_computer.set_name(_temp_cursor.getString(0));
+			_temp_computer.set_comment(_temp_cursor.getString(1));
+			data.add(_temp_computer);
+		}
+		_temp_cursor.close();
+		_db.close();
+		return data;
+	}
+
 	public static boolean has_computer_name(String _name)
 	{
 		SQLiteDatabase _db = _openhelper.getReadableDatabase();
@@ -55,21 +72,12 @@ public class DataUtils
 		return _temp_n;
 	}
 
-	public static ArrayList<Computer> get_computers()
+	public static int update_computerinfo(ComputerInfo _info, int _id)
 	{
-		ArrayList<Computer> data = new ArrayList<Computer>();
-		SQLiteDatabase _db = _openhelper.getReadableDatabase();
-		Cursor _temp_cursor = _db.query("computers", new String[] { "name", "comment" }, null, null, null, null, "id");
-		while (_temp_cursor.moveToNext())
-		{
-			Computer _temp_computer = new Computer();
-			_temp_computer.set_name(_temp_cursor.getString(0));
-			_temp_computer.set_comment(_temp_cursor.getString(1));
-			data.add(_temp_computer);
-		}
-		_temp_cursor.close();
-		_db.close();
-		return data;
+		int _temp_n;
+		SQLiteDatabase _db = _openhelper.getWritableDatabase();
+		_temp_n = _db.update("computers", _info.get_values(), "id=?", new String[] { String.valueOf(_id) });
+		return _temp_n;
 	}
 
 	public static ComputerInfo get_computerinfo(String _name)

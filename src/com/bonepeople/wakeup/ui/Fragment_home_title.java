@@ -20,8 +20,6 @@ public class Fragment_home_title extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-
-		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.fragment_home_title, container, false);
 		setHasOptionsMenu(true);
 		return view;
@@ -39,8 +37,8 @@ public class Fragment_home_title extends Fragment
 		switch (item.getItemId())
 		{
 		case R.id.menu_home_add:
-			Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(getActivity(), EditActivity.class);
+			intent.putExtra("type", "add");
 			startActivity(intent);
 			break;
 		case R.id.menu_home_import:
