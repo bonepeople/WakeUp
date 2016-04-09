@@ -1,24 +1,44 @@
 package com.bonepeople.wakeup.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
 import com.bonepeople.wakeup.model.ComputerInfo;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Xml;
 
 public class XMLUtils
 {
+	private static final int PACKAGE = 1;
+	private static final int COMPUTERS = 2;
+	private static final int COMPUTERINFO = 3;
+	private static final int NAME = 4;
+	private static final int COMMENT = 5;
+	private static final int MAC = 6;
+	private static final int IP = 7;
 
 	public static boolean export_data(Context _context)
 	{
-		ArrayList<ComputerInfo> _data = DataUtils.get_all();
 		XmlSerializer _writer = Xml.newSerializer();
-		File _file = new File(_context.getFilesDir(), "wakeup_export.xml");
+
+		if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+			return false;
+
+		File _file_dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/wakeup");
+		File _file;
+		if (_file_dir.mkdirs() || _file_dir.isDirectory())
+			_file = new File(_file_dir, "wakeup_export.xml");
+		else
+			return false;
+
+		ArrayList<ComputerInfo> _data = DataUtils.get_all();
 		try
 		{
 			FileOutputStream _fos = new FileOutputStream(_file);
@@ -59,11 +79,111 @@ public class XMLUtils
 			_writer.endTag(null, "package");
 
 			_writer.endDocument();
+			_fos.close();
 		}
-		catch (Exception e)
+		catch (Exception _e)
 		{
 			return false;
 		}
 		return true;
+	}
+
+	public static boolean import_data()
+	{
+		ArrayList<ComputerInfo> _data = new ArrayList<ComputerInfo>();
+		ComputerInfo _info = new ComputerInfo();
+		XmlPullParser _reader = Xml.newPullParser();
+		if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+			return false;
+
+		File _file_dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/wakeup");
+		File _file;
+		if (_file_dir.mkdirs() || _file_dir.isDirectory())
+			_file = new File(_file_dir, "wakeup_export.xml");
+		else
+			return false;
+
+		try
+		{
+			FileInputStream _fin = new FileInputStream(_file);
+			_reader.setInput(_fin, "UTF-8");
+			int _type = _reader.getEventType();
+
+			while (_type != XmlPullParser.END_DOCUMENT)
+			{
+				switch (_type)
+				{
+				case XmlPullParser.START_TAG:
+					switch (get_name_code(_reader.getName()))
+					{
+					case PACKAGE:
+						if (!_reader.getAttributeValue(null, "name").equals("com.bonepeople.wakeup"))
+						{
+							_fin.close();
+							return false;
+						}
+						break;
+					case COMPUTERS:
+						_data = new ArrayList<ComputerInfo>();
+						break;
+					case COMPUTERINFO:
+						_info = new ComputerInfo();
+						break;
+					case NAME:
+						_info.set_name(_reader.nextText().trim());// 需要检测合理性
+						break;
+					case COMMENT:
+						_info.set_comment(_reader.nextText().trim());// 需要检测合理性
+						break;
+					case MAC:
+						_info.set_mac(_reader.nextText().trim());// 需要检测合理性
+						break;
+					case IP:
+						_info.set_ip(_reader.nextText().trim());// 需要检测合理性
+						break;
+					default:
+						System.out.println(_reader.getName() + "未被正常识别");
+					}
+					break;
+				case XmlPullParser.END_TAG:
+					switch (get_name_code(_reader.getName()))
+					{
+					case COMPUTERINFO:
+						_data.add(_info);
+						break;
+					case COMPUTERS:
+						_fin.close();
+						return DataUtils.set_all(_data);
+					}
+				}
+
+				_type = _reader.next();
+			}
+		}
+		catch (Exception _e)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	private static int get_name_code(String _name)
+	{
+		if (_name.equals("package"))
+			return PACKAGE;
+		if (_name.equals("computers"))
+			return COMPUTERS;
+		if (_name.equals("ComputerInfo"))
+			return COMPUTERINFO;
+		if (_name.equals("name"))
+			return NAME;
+		if (_name.equals("comment"))
+			return COMMENT;
+		if (_name.equals("mac"))
+			return MAC;
+		if (_name.equals("ip"))
+			return IP;
+		return 0;
 	}
 }

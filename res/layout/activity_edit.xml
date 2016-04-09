@@ -56,7 +56,7 @@
         android:id="@+id/edittext_add_mac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-"
+        android:digits="0123456789abcdefABCDEF-"
         android:hint="例：AA-BB-CC-11-22-33"
         android:inputType="textVisiblePassword"
         android:maxLength="17"

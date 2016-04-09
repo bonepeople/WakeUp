@@ -43,7 +43,11 @@ public class Fragment_home_title extends Fragment
 			startActivity(intent);
 			break;
 		case R.id.menu_home_import:
-			Toast.makeText(getActivity(), "import", Toast.LENGTH_SHORT).show();
+			if (XMLUtils.import_data())
+				Toast.makeText(getActivity(), "信息已导入.", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(getActivity(), "信息导入失败。", Toast.LENGTH_SHORT).show();
+			getActivity().getFragmentManager().findFragmentById(R.id.fragment_home_body).onResume();
 			break;
 		case R.id.menu_home_export:
 			if (XMLUtils.export_data(getActivity()))

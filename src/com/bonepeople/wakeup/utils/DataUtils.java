@@ -80,6 +80,14 @@ public class DataUtils
 		return _temp_n;
 	}
 
+	public static int update_computerinfo(ComputerInfo _info, String _name)
+	{
+		int _temp_n;
+		SQLiteDatabase _db = _openhelper.getWritableDatabase();
+		_temp_n = _db.update("computers", _info.get_values(), "name=?", new String[] { _name });
+		return _temp_n;
+	}
+
 	public static ComputerInfo get_computerinfo(String _name)
 	{
 		SQLiteDatabase _db = _openhelper.getReadableDatabase();
@@ -118,5 +126,31 @@ public class DataUtils
 			_data.add(_temp_info);
 		}
 		return _data;
+	}
+
+	public static boolean set_all(ArrayList<ComputerInfo> _data)
+	{
+		try
+		{
+			for (ComputerInfo computerInfo : _data)
+			{
+				String _name = computerInfo.get_name();
+				if (has_computer_name(_name))
+				{
+					// update
+					update_computerinfo(computerInfo, _name);
+				}
+				else
+				{
+					// add
+					add_computerinfo(computerInfo);
+				}
+			}
+		}
+		catch (Exception _e)
+		{
+			return false;
+		}
+		return true;
 	}
 }

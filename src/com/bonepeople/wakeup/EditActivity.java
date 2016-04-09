@@ -28,7 +28,7 @@ public class EditActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add);
+		setContentView(R.layout.activity_edit);
 		_intent = this.getIntent();
 		_button_ok = (Button) findViewById(R.id.button_add_ok);
 		_button_cancel = (Button) findViewById(R.id.button_add_cancel);

@@ -9,11 +9,11 @@
     <item
         android:id="@+id/menu_home_import"
         android:orderInCategory="2"
-        android:title="导入"/>
+        android:title="从SD卡导入"/>
     <item
         android:id="@+id/menu_home_export"
         android:orderInCategory="3"
-        android:title="导出"/>
+        android:title="导出到SD卡"/>
     <item
         android:id="@+id/menu_home_help"
         android:orderInCategory="4"
