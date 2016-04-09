@@ -2,6 +2,7 @@ package com.bonepeople.wakeup.ui;
 
 import com.bonepeople.wakeup.EditActivity;
 import com.bonepeople.wakeup.R;
+import com.bonepeople.wakeup.Thread_net;
 import com.bonepeople.wakeup.model.ListAdapter_computers;
 import com.bonepeople.wakeup.utils.DataUtils;
 
@@ -78,7 +79,7 @@ public class Fragment_home_body extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				Toast.makeText(getActivity(), "wake", Toast.LENGTH_SHORT).show();
+				new Thread_net(_selected).start();
 				menu_hide();
 			}
 		});
