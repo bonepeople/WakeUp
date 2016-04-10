@@ -1,6 +1,7 @@
 package com.bonepeople.wakeup.ui;
 
 import com.bonepeople.wakeup.EditActivity;
+import com.bonepeople.wakeup.HelpActivity;
 import com.bonepeople.wakeup.R;
 import com.bonepeople.wakeup.utils.XMLUtils;
 
@@ -38,9 +39,9 @@ public class Fragment_home_title extends Fragment
 		switch (item.getItemId())
 		{
 		case R.id.menu_home_add:
-			Intent intent = new Intent(getActivity(), EditActivity.class);
-			intent.putExtra("type", "add");
-			startActivity(intent);
+			Intent _intent_add = new Intent(getActivity(), EditActivity.class);
+			_intent_add.putExtra("type", "add");
+			startActivity(_intent_add);
 			break;
 		case R.id.menu_home_import:
 			if (XMLUtils.import_data())
@@ -56,10 +57,10 @@ public class Fragment_home_title extends Fragment
 				Toast.makeText(getActivity(), "信息导出失败。", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.menu_home_help:
-			Toast.makeText(getActivity(), "help", Toast.LENGTH_SHORT).show();
+			Intent _intent_help = new Intent(getActivity(), HelpActivity.class);
+			startActivity(_intent_help);
 			break;
 		case R.id.menu_home_exit:
-			Toast.makeText(getActivity(), "exit", Toast.LENGTH_SHORT).show();
 			getActivity().finish();
 			break;
 		default:
