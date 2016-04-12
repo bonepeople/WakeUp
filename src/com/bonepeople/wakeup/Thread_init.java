@@ -34,12 +34,10 @@ public class Thread_init extends Thread
 		{
 			try
 			{
-				// Thread.sleep(2000 - dtime);
-				Thread.sleep(200 - dtime);
+				Thread.sleep(1500 - dtime);
 			}
 			catch (InterruptedException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

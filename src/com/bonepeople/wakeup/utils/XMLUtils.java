@@ -98,7 +98,7 @@ public class XMLUtils
 
 		File _file_dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/wakeup");
 		File _file;
-		if (_file_dir.mkdirs() || _file_dir.isDirectory())
+		if (_file_dir.isDirectory())
 			_file = new File(_file_dir, "wakeup_export.xml");
 		else
 			return false;
@@ -130,16 +130,16 @@ public class XMLUtils
 						_info = new ComputerInfo();
 						break;
 					case NAME:
-						_info.set_name(_reader.nextText().trim());// 需要检测合理性
+						_info.set_name(_reader.nextText().trim());
 						break;
 					case COMMENT:
-						_info.set_comment(_reader.nextText().trim());// 需要检测合理性
+						_info.set_comment(_reader.nextText().trim());
 						break;
 					case MAC:
-						_info.set_mac(_reader.nextText().trim());// 需要检测合理性
+						_info.set_mac(_reader.nextText().trim());
 						break;
 					case IP:
-						_info.set_ip(_reader.nextText().trim());// 需要检测合理性
+						_info.set_ip(_reader.nextText().trim());
 						break;
 					default:
 						System.out.println(_reader.getName() + "未被正常识别");
@@ -149,7 +149,13 @@ public class XMLUtils
 					switch (get_name_code(_reader.getName()))
 					{
 					case COMPUTERINFO:
-						_data.add(_info);
+						if (_info.check())
+							_data.add(_info);
+						else
+						{
+							_fin.close();
+							return false;
+						}
 						break;
 					case COMPUTERS:
 						_fin.close();

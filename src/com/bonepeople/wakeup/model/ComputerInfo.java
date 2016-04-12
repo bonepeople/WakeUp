@@ -1,5 +1,7 @@
 package com.bonepeople.wakeup.model;
 
+import java.util.regex.Pattern;
+
 import android.content.ContentValues;
 
 public class ComputerInfo
@@ -75,6 +77,48 @@ public class ComputerInfo
 	public void set_ip(String _ip)
 	{
 		this._ip = _ip;
+	}
+
+	public boolean check()
+	{
+		return check_name() && check_comment() && check_mac() && check_ip();
+	}
+
+	private boolean check_name()
+	{
+		if (this._name.length() > 20 || this._name.isEmpty())
+			return false;
+		else
+			return true;
+	}
+
+	private boolean check_comment()
+	{
+		if (this._comment.length() > 50 || this._comment.isEmpty())
+			return false;
+		else
+			return true;
+	}
+
+	private boolean check_mac()
+	{
+		return Pattern.matches("([0-9A-Fa-f]{2}-){5}[0-9A-Fa-f]{2}", this._mac);
+	}
+
+	private boolean check_ip()
+	{
+		if (Pattern.matches("(\\d{1,3}\\.){3}\\d{1,3}", this._ip))
+		{
+			String[] _temp_string = this._ip.split("[.]");
+			for (String string : _temp_string)
+			{
+				if (Integer.parseInt(string) > 255)
+					return false;
+			}
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public ContentValues get_values()

@@ -88,13 +88,13 @@ public class EditActivity extends Activity
 			_edittext_add_name.requestFocus();
 			return;
 		}
-		if (!check_mac(_string_mac))
+		if (!check_mac(_string_mac))// 可以考虑使用ComputerInfo的check方法
 		{
 			Toast.makeText(EditActivity.this, "MAC地址错误", Toast.LENGTH_SHORT).show();
 			_edittext_add_mac.requestFocus();
 			return;
 		}
-		if (!check_ip(_string_ip))
+		if (!check_ip(_string_ip))// 可以考虑使用ComputerInfo的check方法
 		{
 			Toast.makeText(EditActivity.this, "IP地址错误", Toast.LENGTH_SHORT).show();
 			_edittext_add_ip.requestFocus();
