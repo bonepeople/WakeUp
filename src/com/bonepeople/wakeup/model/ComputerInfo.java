@@ -81,7 +81,7 @@ public class ComputerInfo
 
 	public boolean check()
 	{
-		return check_name() && check_comment() && check_mac() && check_ip();
+		return check_name() && check_comment() && check_mac(this._mac) && check_ip(this._ip);
 	}
 
 	private boolean check_name()
@@ -100,16 +100,16 @@ public class ComputerInfo
 			return true;
 	}
 
-	private boolean check_mac()
+	public static boolean check_mac(String _mac)
 	{
-		return Pattern.matches("([0-9A-Fa-f]{2}-){5}[0-9A-Fa-f]{2}", this._mac);
+		return Pattern.matches("([0-9A-Fa-f]{2}-){5}[0-9A-Fa-f]{2}", _mac);
 	}
 
-	private boolean check_ip()
+	public static boolean check_ip(String _ip)
 	{
-		if (Pattern.matches("(\\d{1,3}\\.){3}\\d{1,3}", this._ip))
+		if (Pattern.matches("(\\d{1,3}\\.){3}\\d{1,3}", _ip))
 		{
-			String[] _temp_string = this._ip.split("[.]");
+			String[] _temp_string = _ip.split("[.]");
 			for (String string : _temp_string)
 			{
 				if (Integer.parseInt(string) > 255)

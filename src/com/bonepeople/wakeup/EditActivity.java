@@ -88,13 +88,13 @@ public class EditActivity extends Activity
 			_edittext_add_name.requestFocus();
 			return;
 		}
-		if (!check_mac(_string_mac))// 可以考虑使用ComputerInfo的check方法
+		if (!ComputerInfo.check_mac(_string_mac))// 可以考虑使用ComputerInfo的check方法
 		{
 			Toast.makeText(EditActivity.this, "MAC地址错误", Toast.LENGTH_SHORT).show();
 			_edittext_add_mac.requestFocus();
 			return;
 		}
-		if (!check_ip(_string_ip))// 可以考虑使用ComputerInfo的check方法
+		if (!ComputerInfo.check_ip(_string_ip))// 可以考虑使用ComputerInfo的check方法
 		{
 			Toast.makeText(EditActivity.this, "IP地址错误", Toast.LENGTH_SHORT).show();
 			_edittext_add_ip.requestFocus();
@@ -130,37 +130,5 @@ public class EditActivity extends Activity
 		}
 
 		return !DataUtils.has_computer_name(_name);
-	}
-
-	private boolean check_mac(String _mac)
-	{
-		String[] _temp_string = _mac.split("-");
-		if (_temp_string.length == 6)
-		{
-			for (String string : _temp_string)
-			{
-				if (string.length() != 2)
-					return false;
-			}
-		}
-		else
-			return false;
-		return true;
-	}
-
-	private boolean check_ip(String _ip)
-	{
-		String[] _temp_string = _ip.split("[.]");
-		if (_temp_string.length == 4)
-		{
-			for (String string : _temp_string)
-			{
-				if (string.isEmpty() || Integer.parseInt(string) > 255)
-					return false;
-			}
-		}
-		else
-			return false;
-		return true;
 	}
 }

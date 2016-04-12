@@ -6,6 +6,7 @@ import com.bonepeople.wakeup.utils.DataUtils;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,6 +59,11 @@ public class Fragment_home_comment extends Fragment
 		_text_comment.setText(_temp_info.get_comment());
 		_text_mac.setText(_temp_info.get_mac());
 		_text_ip.setText(_temp_info.get_ip());
+
+		if (_text_comment.getLineCount() > 5)
+			_text_comment.setMovementMethod(ScrollingMovementMethod.getInstance());
+		else
+			_text_comment.setMovementMethod(null);
 	}
 
 	public void show(String _name)
