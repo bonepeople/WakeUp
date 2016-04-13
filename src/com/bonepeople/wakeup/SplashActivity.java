@@ -37,7 +37,7 @@ public class SplashActivity extends Activity
 				Toast.makeText(getApplicationContext(), "版本过时，需要更新。", Toast.LENGTH_SHORT).show();
 				load_HomeActivity();
 			}
-			Toast.makeText(getApplicationContext(), "后台用时：" + String.valueOf(msg.arg1), Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), "后台用时：" + String.valueOf(msg.arg1), Toast.LENGTH_SHORT).show();
 		};
 	};
 

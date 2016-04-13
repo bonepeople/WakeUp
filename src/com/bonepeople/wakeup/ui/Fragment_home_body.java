@@ -157,7 +157,7 @@ public class Fragment_home_body extends Fragment
 	{
 		_listadapter.refresh_data();
 		_listadapter.notifyDataSetChanged();
-
+		onBackPressed();//刷新界面的时候确保菜单和详细信息页面是未显示的状态。
 		super.onResume();
 	}
 
