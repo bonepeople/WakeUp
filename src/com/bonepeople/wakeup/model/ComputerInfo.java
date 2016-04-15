@@ -94,7 +94,7 @@ public class ComputerInfo
 
 	private boolean check_comment()
 	{
-		if (this._comment.length() > 50 || this._comment.isEmpty())
+		if (this._comment.length() > 50)
 			return false;
 		else
 			return true;

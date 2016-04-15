@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#79000000" >
+    android:background="#22B14C" >
 
     <TextView
         android:id="@+id/textview_fragment_home_title"
