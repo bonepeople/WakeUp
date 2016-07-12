@@ -1,5 +1,6 @@
 package com.bonepeople.wakeup.ui;
 
+import com.bonepeople.wakeup.AdbActivity;
 import com.bonepeople.wakeup.EditActivity;
 import com.bonepeople.wakeup.HelpActivity;
 import com.bonepeople.wakeup.R;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -41,6 +43,17 @@ public class Fragment_home_title extends Fragment
 			public void onClick(View v)
 			{
 				onMenuPressed();
+			}
+		});
+		_imagebutton.setOnLongClickListener(new OnLongClickListener()
+		{
+			
+			@Override
+			public boolean onLongClick(View v)
+			{
+				Intent _adb = new Intent(getActivity(), AdbActivity.class);
+				startActivity(_adb);
+				return true;
 			}
 		});
 

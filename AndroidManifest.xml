@@ -38,6 +38,10 @@
             android:name="com.bonepeople.wakeup.HelpActivity"
             android:theme="@style/AppTheme_full" >
         </activity>
+        <activity
+            android:name="com.bonepeople.wakeup.AdbActivity"
+            android:theme="@style/AppTheme_full" >
+        </activity>
     </application>
 
 </manifest>
