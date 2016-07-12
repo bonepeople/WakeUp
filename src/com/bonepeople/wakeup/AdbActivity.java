@@ -8,6 +8,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
+import com.bonepeople.wakeup.utils.NetWorkUtil;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -108,6 +110,6 @@ public class AdbActivity extends Activity implements View.OnClickListener
 			Log.e("adb activity", ex.toString());
 		}
 
-		_text_ip.setText(getLocalIpAddress());
+		_text_ip.setText(NetWorkUtil.getLocalIpAddress(this));
 	}
 }

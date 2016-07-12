@@ -17,7 +17,6 @@ public class NetWorkUtil
 	 */
 	public static boolean checkEnable(Context paramContext)
 	{
-		boolean i = false;
 		NetworkInfo localNetworkInfo = ((ConnectivityManager) paramContext.getSystemService("connectivity")).getActiveNetworkInfo();
 		if ((localNetworkInfo != null) && (localNetworkInfo.isAvailable()))
 			return true;
