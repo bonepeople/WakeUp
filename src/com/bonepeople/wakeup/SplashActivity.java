@@ -27,17 +27,17 @@ public class SplashActivity extends Activity
 			switch (msg.what)
 			{
 			case INIT_FAILED:
-				Toast.makeText(getApplicationContext(), "³ÌĞò¼ÓÔØÊ§°Ü£¬ÇëÖØĞÂ°²×°", Toast.LENGTH_SHORT).show();
-				textView_splash_version.setText("³ÌĞò¼ÓÔØÊ§°Ü£¬ÇëÖØĞÂ°²×°");
+				Toast.makeText(getApplicationContext(), "ç¨‹åºåŠ è½½å¤±è´¥ï¼Œè¯·é‡æ–°å®‰è£…", Toast.LENGTH_SHORT).show();
+				textView_splash_version.setText("ç¨‹åºåŠ è½½å¤±è´¥ï¼Œè¯·é‡æ–°å®‰è£…");
 				break;
 			case INIT_SUCCESSFUL:
 				load_HomeActivity();
 				break;
 			case INIT_UPDATE:
-				Toast.makeText(getApplicationContext(), "°æ±¾¹ıÊ±£¬ĞèÒª¸üĞÂ¡£", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "ç‰ˆæœ¬è¿‡æ—¶ï¼Œéœ€è¦æ›´æ–°ã€‚", Toast.LENGTH_SHORT).show();
 				load_HomeActivity();
 			}
-			// Toast.makeText(getApplicationContext(), "ºóÌ¨ÓÃÊ±£º" + String.valueOf(msg.arg1), Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), "åå°ç”¨æ—¶ï¼š" + String.valueOf(msg.arg1), Toast.LENGTH_SHORT).show();
 		};
 	};
 
@@ -47,7 +47,7 @@ public class SplashActivity extends Activity
 		setContentView(R.layout.activity_splash);
 		relativeLayout_splash_root = (RelativeLayout) this.findViewById(R.id.relativeLayout_splash_root);
 		textView_splash_version = (TextView) this.findViewById(R.id.textView_splash_version);
-		textView_splash_version.setText("°æ±¾ºÅ£º" + AppInfoUtils.getAppVersion(this));
+		textView_splash_version.setText("ç‰ˆæœ¬å·ï¼š" + AppInfoUtils.getAppVersion(this));
 
 		AlphaAnimation aa = new AlphaAnimation(0.0f, 1.0f);
 		aa.setDuration(2000);

@@ -142,7 +142,7 @@ public class XMLUtils
 						_info.set_ip(_reader.nextText().trim());
 						break;
 					default:
-						System.out.println(_reader.getName() + "未被正常识别");
+						System.out.println(_reader.getName() + "鏈姝ｅ父璇嗗埆");
 					}
 					break;
 				case XmlPullParser.END_TAG:

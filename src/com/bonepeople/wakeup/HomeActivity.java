@@ -24,10 +24,10 @@ public class HomeActivity extends Activity
 			switch (msg.what)
 			{
 			case WAKE_FAILED:
-				Toast.makeText(_context, "·¢ËÍ¿ª»úĞÅÏ¢Ê§°Ü¡£", Toast.LENGTH_SHORT).show();
+				Toast.makeText(_context, "å‘é€å¼€æœºä¿¡æ¯å¤±è´¥ã€‚", Toast.LENGTH_SHORT).show();
 				break;
 			case WAKE_SUCCESSFUL:
-				Toast.makeText(_context, "¿ª»úĞÅÏ¢ÒÑ·¢ËÍ¡£", Toast.LENGTH_SHORT).show();
+				Toast.makeText(_context, "å¼€æœºä¿¡æ¯å·²å‘é€ã€‚", Toast.LENGTH_SHORT).show();
 				break;
 			}
 		};

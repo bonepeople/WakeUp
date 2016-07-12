@@ -113,9 +113,9 @@ public class Fragment_home_body extends Fragment
 				int _temp_n;
 				_temp_n = DataUtils.delete_computerinfo(_selected);
 				if (_temp_n == 0)
-					Toast.makeText(getActivity(), "Êı¾İ¿âÒì³££¬ÇëÖØĞÂ³¢ÊÔ¡£", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "æ•°æ®åº“å¼‚å¸¸ï¼Œè¯·é‡æ–°å°è¯•ã€‚", Toast.LENGTH_SHORT).show();
 				else
-					Toast.makeText(getActivity(), "ÒÑ¾­É¾³ı" + _temp_n + "Ìõ¼ÇÂ¼¡£", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "å·²ç»åˆ é™¤" + _temp_n + "æ¡è®°å½•ã€‚", Toast.LENGTH_SHORT).show();
 
 				_listadapter.refresh_data();
 				_listadapter.notifyDataSetChanged();
@@ -157,7 +157,7 @@ public class Fragment_home_body extends Fragment
 	{
 		_listadapter.refresh_data();
 		_listadapter.notifyDataSetChanged();
-		onBackPressed();//Ë¢ĞÂ½çÃæµÄÊ±ºòÈ·±£²Ëµ¥ºÍÏêÏ¸ĞÅÏ¢Ò³ÃæÊÇÎ´ÏÔÊ¾µÄ×´Ì¬¡£
+		onBackPressed();// åˆ·æ–°ç•Œé¢çš„æ—¶å€™ç¡®ä¿èœå•å’Œè¯¦ç»†ä¿¡æ¯é¡µé¢æ˜¯æœªæ˜¾ç¤ºçš„çŠ¶æ€ã€‚
 		super.onResume();
 	}
 

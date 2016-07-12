@@ -2,8 +2,8 @@ package com.bonepeople.wakeup.model;
 
 public class Computer
 {
-	private String _name = "¿Õ¿ÕÈçÒ²";
-	private String _comment = "Í¨¹ıÓÒÉÏ½ÇµÄ²Ëµ¥Ìí¼ÓµçÄÔ°É";
+	private String _name = "ç©ºç©ºå¦‚ä¹Ÿ";
+	private String _comment = "é€šè¿‡å³ä¸Šè§’çš„èœå•æ·»åŠ ç”µè„‘å§";
 
 	public String get_name()
 	{

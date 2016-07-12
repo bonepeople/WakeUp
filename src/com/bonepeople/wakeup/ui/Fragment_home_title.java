@@ -47,7 +47,7 @@ public class Fragment_home_title extends Fragment
 		});
 		_imagebutton.setOnLongClickListener(new OnLongClickListener()
 		{
-			
+
 			@Override
 			public boolean onLongClick(View v)
 			{
@@ -70,9 +70,9 @@ public class Fragment_home_title extends Fragment
 		View _view = LayoutInflater.from(getActivity()).inflate(R.layout.menu_system, null);
 		_popupwindow = new PopupWindow(_view, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
 		_popupwindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.frame));
-		
+
 		_listview = (ListView) _view.findViewById(R.id.listview_fragment_home_title);
-		ArrayAdapter<String> _adapter = new ArrayAdapter<String>(getActivity(), R.layout.item_menu, R.id.textview_item_menu, new String[] { "Ìí¼ÓµçÄÔ", "´ÓSD¿¨µ¼Èë", "µ¼³öµ½SD¿¨", "°ïÖú", "ÍË³ö" });
+		ArrayAdapter<String> _adapter = new ArrayAdapter<String>(getActivity(), R.layout.item_menu, R.id.textview_item_menu, new String[] { "æ·»åŠ ç”µè„‘", "ä»SDå¡å¯¼å…¥", "å¯¼å‡ºåˆ°SDå¡", "å¸®åŠ©", "é€€å‡º" });
 		_listview.setAdapter(_adapter);
 
 		_listview.setOnItemClickListener(new OnItemClickListener()
@@ -89,16 +89,16 @@ public class Fragment_home_title extends Fragment
 					break;
 				case 1:
 					if (XMLUtils.import_data())
-						Toast.makeText(getActivity(), "ĞÅÏ¢ÒÑµ¼Èë.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "ä¿¡æ¯å·²å¯¼å…¥.", Toast.LENGTH_SHORT).show();
 					else
-						Toast.makeText(getActivity(), "ĞÅÏ¢µ¼ÈëÊ§°Ü¡£", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "ä¿¡æ¯å¯¼å…¥å¤±è´¥ã€‚", Toast.LENGTH_SHORT).show();
 					getActivity().getFragmentManager().findFragmentById(R.id.fragment_home_body).onResume();
 					break;
 				case 2:
 					if (XMLUtils.export_data(getActivity()))
-						Toast.makeText(getActivity(), "ĞÅÏ¢ÒÑ³É¹¦µ¼³ö¡£", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "ä¿¡æ¯å·²æˆåŠŸå¯¼å‡ºã€‚", Toast.LENGTH_SHORT).show();
 					else
-						Toast.makeText(getActivity(), "ĞÅÏ¢µ¼³öÊ§°Ü¡£", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "ä¿¡æ¯å¯¼å‡ºå¤±è´¥ã€‚", Toast.LENGTH_SHORT).show();
 					break;
 				case 3:
 					Intent _intent_help = new Intent(getActivity(), HelpActivity.class);

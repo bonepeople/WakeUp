@@ -45,10 +45,10 @@ public class Thread_net extends Thread
 			InetAddress destHost = InetAddress.getByName(_string_ip);
 			// construct packet data
 			byte[] magicBytes = new byte[102];
-			// ½«Êı¾İ°üµÄÇ°6Î»·ÅÈë0xFF¼´ "FF"µÄ¶ş½øÖÆ
+			// å°†æ•°æ®åŒ…çš„å‰6ä½æ”¾å…¥0xFFå³ "FF"çš„äºŒè¿›åˆ¶
 			for (int i = 0; i < 6; i++)
 				magicBytes[i] = (byte) 0xFF;
-			// ´ÓµÚ7¸öÎ»ÖÃ¿ªÊ¼°ÑmacµØÖ··ÅÈë16´Î
+			// ä»ç¬¬7ä¸ªä½ç½®å¼€å§‹æŠŠmacåœ°å€æ”¾å…¥16æ¬¡
 			for (int i = 0; i < 16; i++)
 			{
 				for (int j = 0; j < destMac.length; j++)

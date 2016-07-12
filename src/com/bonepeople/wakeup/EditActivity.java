@@ -79,24 +79,24 @@ public class EditActivity extends Activity
 
 		if (_string_name.isEmpty() || _string_mac.isEmpty() || _string_ip.isEmpty())
 		{
-			Toast.makeText(EditActivity.this, "ÇëÍêÉÆÒÔÉÏĞÅÏ¢", Toast.LENGTH_SHORT).show();
+			Toast.makeText(EditActivity.this, "è¯·å®Œå–„ä»¥ä¸Šä¿¡æ¯", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (!check_name(_string_name))
 		{
-			Toast.makeText(EditActivity.this, "Ãû³ÆÖØ¸´", Toast.LENGTH_SHORT).show();
+			Toast.makeText(EditActivity.this, "åç§°é‡å¤", Toast.LENGTH_SHORT).show();
 			_edittext_add_name.requestFocus();
 			return;
 		}
-		if (!ComputerInfo.check_mac(_string_mac))// ¿ÉÒÔ¿¼ÂÇÊ¹ÓÃComputerInfoµÄcheck·½·¨
+		if (!ComputerInfo.check_mac(_string_mac))// å¯ä»¥è€ƒè™‘ä½¿ç”¨ComputerInfoçš„checkæ–¹æ³•
 		{
-			Toast.makeText(EditActivity.this, "MACµØÖ·´íÎó", Toast.LENGTH_SHORT).show();
+			Toast.makeText(EditActivity.this, "MACåœ°å€é”™è¯¯", Toast.LENGTH_SHORT).show();
 			_edittext_add_mac.requestFocus();
 			return;
 		}
-		if (!ComputerInfo.check_ip(_string_ip))// ¿ÉÒÔ¿¼ÂÇÊ¹ÓÃComputerInfoµÄcheck·½·¨
+		if (!ComputerInfo.check_ip(_string_ip))// å¯ä»¥è€ƒè™‘ä½¿ç”¨CComputerInfoçš„checkæ–¹æ³•
 		{
-			Toast.makeText(EditActivity.this, "IPµØÖ·´íÎó", Toast.LENGTH_SHORT).show();
+			Toast.makeText(EditActivity.this, "IPåœ°å€é”™è¯¯", Toast.LENGTH_SHORT).show();
 			_edittext_add_ip.requestFocus();
 			return;
 		}
@@ -105,15 +105,15 @@ public class EditActivity extends Activity
 		if (_type.equalsIgnoreCase("add"))
 		{
 			DataUtils.add_computerinfo(_temp_info);
-			Toast.makeText(EditActivity.this, "ĞÅÏ¢ÒÑÌí¼Ó", Toast.LENGTH_SHORT).show();
+			Toast.makeText(EditActivity.this, "ä¿¡æ¯å·²æ·»åŠ ", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
 			int _temp_n = DataUtils.update_computerinfo(_temp_info, _computer_info.get_id());
 			if (_temp_n == 1)
-				Toast.makeText(EditActivity.this, "¼ÇÂ¼ÒÑ±ä¸ü", Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditActivity.this, "è®°å½•å·²å˜æ›´", Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(EditActivity.this, "Êı¾İÒì³££¬ÇëÖØĞÂ³¢ÊÔ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(EditActivity.this, "æ•°æ®å¼‚å¸¸ï¼Œè¯·é‡æ–°å°è¯•", Toast.LENGTH_SHORT).show();
 		}
 		finish();
 		// setResult(1, _intent);
