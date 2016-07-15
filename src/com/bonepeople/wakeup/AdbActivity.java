@@ -1,25 +1,19 @@
 package com.bonepeople.wakeup;
 
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-
 import com.bonepeople.wakeup.utils.NetWorkUtil;
+import com.bonepeople.wakeup.utils.ShellUtils;
+import com.bonepeople.wakeup.utils.ShellUtils.CommandResult;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class AdbActivity extends Activity implements View.OnClickListener
 {
-	private Button _button_open;
+	private boolean _open = false;
+	private Button _button_adb;
 	private TextView _text_ip;
 
 	@Override
@@ -28,88 +22,128 @@ public class AdbActivity extends Activity implements View.OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_adb);
 
-		_button_open = (Button) findViewById(R.id.button_open);
+		_button_adb = (Button) findViewById(R.id.button_adb);
 		_text_ip = (TextView) findViewById(R.id.textview_ip);
 
-		_button_open.setOnClickListener(this);
+		_button_adb.setOnClickListener(this);
+
+		init();
 	}
 
-	public String getLocalIpAddress()
+	private void init()
 	{
+		String _command = "getprop service.adb.tcp.port";
+		CommandResult _result = ShellUtils.execCommand(_command, true, true);
+		System.out.println(_command + "-result:" + _result.result);
+		System.out.println(_command + "-success:" + _result.successMsg);
+		System.out.println(_command + "-error:" + _result.errorMsg);
+		System.out.println(_command + "-over");
+		String _port = _result.successMsg;
 		try
 		{
-			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();)
+			if (!_port.isEmpty())
 			{
-				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();)
+				if (Integer.parseInt(_port) > 0)
 				{
-					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress())
-					{
-						return inetAddress.getHostAddress().toString();
-					}
+					_text_ip.setText("当前手机已开启远程调试功能\n" + "请链接 " + NetWorkUtil.getLocalIpAddress(this) + ":" + _port + " 进行调试");
+					_open = true;
+					_button_adb.setText("关闭");
+				}
+				else
+				{
+					_text_ip.setText("当前手机未开启远程调试功能");
 				}
 			}
+			else
+			{
+				_text_ip.setText("当前手机未开启远程调试功能");
+			}
 		}
-		catch (SocketException ex)
+		catch (Exception e)
 		{
-			Log.e("adb activity", ex.toString());
+			_text_ip.setText("当前手机未开启远程调试功能");
 		}
-		return null;
-	}
-
-	public static void printParameter(NetworkInterface ni) throws Exception
-	{
-		System.out.println(" Name = " + ni.getName());
-		System.out.println(" Display Name = " + ni.getDisplayName());
-		System.out.println(" Is up = " + ni.isUp());
-		System.out.println(" Support multicast = " + ni.supportsMulticast());
-		System.out.println(" Is loopback = " + ni.isLoopback());
-		System.out.println(" Is virtual = " + ni.isVirtual());
-		System.out.println(" Is point to point = " + ni.isPointToPoint());
-		System.out.println(" Hardware address = " + ni.getHardwareAddress());
-		System.out.println(" MTU = " + ni.getMTU());
-
-		System.out.println("================ List of Interface Addresses:");
-		List<InterfaceAddress> list = ni.getInterfaceAddresses();
-		Iterator<InterfaceAddress> it = list.iterator();
-
-		while (it.hasNext())
-		{
-			InterfaceAddress ia = it.next();
-			System.out.println(" Address = " + ia.getAddress());
-			System.out.println(" Broadcast = " + ia.getBroadcast());
-			System.out.println(" Network prefix length = " + ia.getNetworkPrefixLength());
-			System.out.println("");
-		}
-		System.out.println("================ List over");
 	}
 
 	@Override
 	public void onClick(View v)
 	{
-		// Toast.makeText(this, "open", Toast.LENGTH_SHORT).show();
-		// System.out.println("send su");
-		//
-		// CommandResult _result = ShellUtils.execCommand("setprop service.adb.tcp.port 5555", true, true);
-		// System.out.println("result:" + _result.result);
-		// System.out.println("success:" + _result.successMsg);
-		// System.out.println("error:" + _result.errorMsg);
-		// System.out.println("over");
-
-		try
+		CommandResult _result;
+		String _command;
+		switch (v.getId())
 		{
-			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();)
+		case R.id.button_adb:
+			if (_open)
 			{
-				NetworkInterface intf = en.nextElement();
-				printParameter(intf);
-			}
-		}
-		catch (Exception ex)
-		{
-			Log.e("adb activity", ex.toString());
-		}
+				// close
+				int _code;
+				_command = "setprop service.adb.tcp.port -1";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code = _result.result;
 
-		_text_ip.setText(NetWorkUtil.getLocalIpAddress(this));
+				_command = "stop adbd";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code += _result.result;
+
+				if (_code == 0)
+				{
+					_text_ip.setText("已关闭远程调试功能");
+					_open = false;
+					_button_adb.setText("开启");
+				}
+				else
+				{
+					_text_ip.setText("远程调试关闭失败");
+				}
+			}
+			else
+			{
+				// open
+				int _code;
+				_command = "setprop service.adb.tcp.port 5555";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code = _result.result;
+
+				_command = "stop adbd";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code += _result.result;
+
+				_command = "start adbd";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code += _result.result;
+
+				if (_code == 0)
+				{
+					_text_ip.setText("当前手机已开启远程调试功能\n" + "请链接 " + NetWorkUtil.getLocalIpAddress(this) + ":5555 进行调试");
+					_open = true;
+					_button_adb.setText("关闭");
+				}
+				else
+				{
+					_text_ip.setText("远程调试开启失败");
+				}
+			}
+			break;
+		}
 	}
 }
