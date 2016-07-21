@@ -93,6 +93,14 @@ public class AdbActivity extends Activity implements View.OnClickListener
 				System.out.println(_command + "-over");
 				_code += _result.result;
 
+				_command = "start adbd";
+				_result = ShellUtils.execCommand(_command, true, true);
+				System.out.println(_command + "-result:" + _result.result);
+				System.out.println(_command + "-success:" + _result.successMsg);
+				System.out.println(_command + "-error:" + _result.errorMsg);
+				System.out.println(_command + "-over");
+				_code += _result.result;
+				
 				if (_code == 0)
 				{
 					_text_ip.setText("已关闭远程调试功能");
