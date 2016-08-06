@@ -2,26 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/textview_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="手机将开启adb远程调试模式\n使用此功能需要root权限" />
-
-    <Button
-        android:id="@+id/button_adb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开启" />
+        android:text="您现在手机的宽高为：" />
 
     <TextView
-        android:id="@+id/textview_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:gravity="center" />
+        android:drawableRight="@drawable/dpi"
+        android:gravity="center"
+        android:text="当前显示的分辨率级别为：" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="手机将开启adb远程调试模式\n使用此功能需要root权限" />
+
+        <Button
+            android:id="@+id/button_adb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开启" />
+
+        <TextView
+            android:id="@+id/textview_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:gravity="center" />
+    </LinearLayout>
 
 </LinearLayout>

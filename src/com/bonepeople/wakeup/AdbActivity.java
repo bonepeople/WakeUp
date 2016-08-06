@@ -5,8 +5,11 @@ import com.bonepeople.wakeup.utils.ShellUtils;
 import com.bonepeople.wakeup.utils.ShellUtils.CommandResult;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,7 +17,7 @@ public class AdbActivity extends Activity implements View.OnClickListener
 {
 	private boolean _open = false;
 	private Button _button_adb;
-	private TextView _text_ip;
+	private TextView _text_ip, _text_screen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -24,9 +27,18 @@ public class AdbActivity extends Activity implements View.OnClickListener
 
 		_button_adb = (Button) findViewById(R.id.button_adb);
 		_text_ip = (TextView) findViewById(R.id.textview_ip);
+		_text_screen = (TextView) findViewById(R.id.textview_screen);
 
 		_button_adb.setOnClickListener(this);
 
+		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+		Point _outSize = new Point(0, 0);
+		wm.getDefaultDisplay().getSize(_outSize);
+		int screen_width = _outSize.x;
+		int screen_height = _outSize.y;
+
+		String _string_screen = "您现在手机的宽度为：" + screen_width + "，高度为：" + screen_height;
+		_text_screen.setText(_string_screen);
 		init();
 	}
 
@@ -100,7 +112,7 @@ public class AdbActivity extends Activity implements View.OnClickListener
 				System.out.println(_command + "-error:" + _result.errorMsg);
 				System.out.println(_command + "-over");
 				_code += _result.result;
-				
+
 				if (_code == 0)
 				{
 					_text_ip.setText("已关闭远程调试功能");
